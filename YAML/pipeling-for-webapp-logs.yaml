@@ -1,0 +1,16 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: '<YourServiceConnectionName>' # change it to service connection
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      # Read logs from the web app
+      az webapp log tail  --name uni-leb-neourodb --resource-group rs-uni-leb --slot tst --subscription "83098d8e-02cd-4f17-9f08-be5bd22c590b"
+  displayName: 'Read Web App Logs'
